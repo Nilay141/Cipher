@@ -108,10 +108,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     int depth;
-    String Encryption(String plainText,int depth)throws Exception
+    String Encryption(String plainText,int depth) //throws Exception
     {
         int r=depth,len=plainText.length();
-        int c=len/depth;
+        double d= Math.ceil((double)len/depth);
+        int c = (int) d;
         char mat[][]=new char[r][c];
         int k=0;
 
@@ -141,7 +142,8 @@ public class MainActivity extends AppCompatActivity {
     String Decryption(String cipherText,int depth)throws Exception
     {
         int r=depth,len=cipherText.length();
-        int c=len/depth;
+        double d= Math.ceil((double)len/depth);
+        int c = (int) d;
         char mat[][]=new char[r][c];
         int k=0;
 
