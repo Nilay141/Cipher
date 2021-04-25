@@ -92,12 +92,11 @@ public class Additive extends AppCompatActivity {
                 key = keyinput.getText().toString();
                 txt = input.getText().toString();
                 int depth=Integer.parseInt(key);
-
-                try {
+//                try {
                     output.setText(Encryption(txt, depth).toUpperCase());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
 
             }
         });
@@ -110,7 +109,7 @@ public class Additive extends AppCompatActivity {
                 txt = input.getText().toString();
                 int depth=Integer.parseInt(key);
 //                try {
-//                   output.setText(Decryption(txt, depth).toUpperCase());
+                   output.setText(Decryption(txt, depth).toUpperCase());
 //                } catch (Exception e) {
 //                    e.printStackTrace();
 //                }
@@ -135,9 +134,16 @@ public class Additive extends AppCompatActivity {
         for (int i = 0; i < plainT.length(); i++) {
             int mappingV = alph.indexOf(plainT.charAt(i));
             // value of each alphabet in integers like for A=0, B=1 ...
-            int enVal = (shift + mappingV) % 26;
-            char Val = alph.charAt(enVal); // the character to be replaced
-            cipherT = cipherT + Val; // adding to ciphertext
+            if(mappingV == -1) {
+
+                String Val = " "; // the character to be replaced
+                cipherT = cipherT + Val;
+            } else{
+                int enVal = (shift + mappingV) % 26;
+                char Val = alph.charAt(enVal); // the character to be replaced
+                cipherT = cipherT + Val; // adding to ciphertext
+            }
+
         }
         return cipherT;
     }
@@ -151,13 +157,21 @@ public class Additive extends AppCompatActivity {
         // initializing empty string to add alphabets iteratively
         for (int i = 0; i < cipherT.length(); i++) {
             int mappingV = alph.indexOf(cipherT.charAt(i));
-            int deVal = (mappingV - shift) % 26;
-            if (deVal < 0) // to handle the negative values
-            {
-                deVal = alph.length() + deVal;
+            if(mappingV == -1) {
+
+                String Val = " "; // the character to be replaced
+                plainT = plainT + Val;
+            } else{
+                int deVal = (mappingV - shift) % 26;
+                if (deVal < 0) // to handle the negative values
+                {
+                    deVal = alph.length() + deVal;
+                }
+                char Val = alph.charAt(deVal); // the character to be replaced
+                plainT = plainT + Val; // adding to plaintext
             }
-            char Val = alph.charAt(deVal); // the character to be replaced
-            plainT = plainT + Val; // adding to plaintext
+
+
         }
         return plainT;
     }
