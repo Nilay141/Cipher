@@ -1,3 +1,3 @@
 # Cipher
 
-here is the railfence cipher code in android studio.
+Here there is Additive cipher and Railfence cipher in Android studio 
